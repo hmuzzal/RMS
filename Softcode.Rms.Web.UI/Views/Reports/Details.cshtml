@@ -1,0 +1,61 @@
+﻿@model Softcode.Rms.Web.UI.Models.Report
+
+@{
+    ViewData["Title"] = "Details";
+    var imageUrl = "~/Images/" + (Model.ImageUrl ?? "noimage.jpg");
+}
+
+<h3 class="text-center mb-1">Report Details</h3>
+
+<div class="col-sm-12 text-center text-dark">
+
+
+    <div>
+        <div class="float-right">
+                <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+                <a asp-action="Index">Back to List</a>
+            </div>
+    </div>
+
+    <div class="text-hide">
+        <h5 class="t-ar">
+        </h5>
+    </div>
+
+    <div>
+        <h5>
+            @Html.DisplayNameFor(model => model.Title):
+            @Html.DisplayFor(model => model.Title)
+        </h5>
+    </div>
+
+    <div>
+        <h5>
+            @Html.DisplayNameFor(model => model.IsoNo):
+            @Html.DisplayFor(model => model.IsoNo)
+        </h5>
+    </div>
+    <div>
+        <h5>
+            @Html.DisplayNameFor(model => model.Description):
+            @Html.DisplayFor(model => model.Description)
+        </h5>
+    </div>
+    <div>
+        <h5>
+            @Html.DisplayNameFor(model => model.Module):
+            @Html.DisplayFor(model => model.Module.Name)
+        </h5>
+    </div>
+    <div>
+        <h5>
+            @Html.DisplayNameFor(model => model.SubModule):
+            @Html.DisplayFor(model => model.SubModule.Name)
+        </h5>
+    </div>
+</div>
+
+
+<div class="mt-4 text-center border">
+    <img class="card-img-top" src="@imageUrl" asp-append-version="true" />
+</div>

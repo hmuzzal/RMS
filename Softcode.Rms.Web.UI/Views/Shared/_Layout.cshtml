@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - GTexERP</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
+
+</head>
+
+
+<body>
+    <header>
+        @await Html.PartialAsync("_navmenu")
+    </header>
+
+
+    <div class="container-fluid">
+        <div class="row">
+            @await Html.PartialAsync("_sidemenu")
+
+            <div class="col-sm-9 col-md-9 col-lg-10">
+                <div class="ms-view m-3" id="m-view">
+                    @RenderBody()
+                </div>
+
+                <footer class="border-top footer text-muted text-center">
+                    <div class="container">
+                        &copy; @DateTime.Now.ToString("yyyy") - GTexERP - <a target="_blank" rel="noopener noreferrer" href="http://soft-code.net/">Soft-Code</a>
+                    </div>
+                </footer>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script type="text/javascript">
+        function loadSubMenu(id) {
+            $("#sidNavBar").load("/Modules/SideNavBer?id=" + id);
+        }
+        function loadReport(imageUrl) {
+            $(".ms-view").addClass("text-center");
+            $("#m-view").html($("<img>").attr("src", imageUrl));
+        }
+    </script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+
+</html>

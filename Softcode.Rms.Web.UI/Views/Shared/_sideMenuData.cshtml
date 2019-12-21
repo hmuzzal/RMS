@@ -1,0 +1,8 @@
+﻿<ul class="nav">
+    @foreach (var report in Model)
+    {
+    <li class="side-li border-bottom mt-1 mb-1">
+        <a class="text-white pl-3" onclick="loadReport('@report.ImageUrl')">@report.Title</a>
+    </li>
+    }
+</ul>

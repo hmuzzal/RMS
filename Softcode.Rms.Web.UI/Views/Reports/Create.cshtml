@@ -1,0 +1,140 @@
+﻿@model Softcode.Rms.Web.UI.Models.ReportViewModel
+
+@{
+    ViewData["Title"] = "Reports";
+}
+
+
+
+<h3 class="text-center">Create Report</h3>
+
+<hr />
+<div class="row mt-4">
+    <div class="col-md-12 form-custom-1">
+        <div class="border header-1">
+            <p class="ml-4 mt-2 text-white">Module</p>
+        </div>
+        <form enctype="multipart/form-data" asp-action="Create">
+            <fieldset class="border-1 p-2">
+                <div asp-validation-summary="ModelOnly" class="text-danger ml-4 mb-3"></div>
+                <div class="col-md-4 float-left mr-3">
+                    <div class="form-group">
+                        <label asp-for="Title" class="control-label"></label>
+                        <input asp-for="Title" class="form-control" autofocus="autofocus" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="IsoNo" class="control-label"></label>
+                        <input asp-for="IsoNo" class="form-control" />
+                        <span asp-validation-for="IsoNo" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4 float-left">
+                    <div class="form-group">
+                        <label asp-for="ModuleId" class="control-label"></label>
+                        <select asp-for="ModuleId" class="form-control" asp-items="ViewBag.ModuleId">
+                            <option>Please select a Module</option>
+                        </select>
+                        <span asp-validation-for="ModuleId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SubModuleId" class="control-label"></label>
+                        <select asp-for="SubModuleId" class="form-control" asp-items="null">
+                            <option>Please select a Module</option>
+                        </select>
+                        <span asp-validation-for="SubModuleId" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <lable asp-for="Image" class="col-form-label">Image</lable>
+                        <div>
+                            <div class="custom-file">
+                                <input asp-for="Image" class="form-control custom-file-input" onchange="loadFile(event)" />
+                                <label class="custom-file-label">Choose Image...</label>
+                                <span asp-validation-for="Image" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <div class="form-group">
+                            <input type="submit" value="Create" class="btn btn-primary float-right" />
+                        </div>
+                        <div class="form-group">
+                            <a asp-action="Index">Back to List</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-3 float-left">
+                    <img src="~/images/noimage.jpg" class="upload-box border" id="output" />
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#ModuleId").change(function() {
+                $("#SubModuleId").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetSubModule","Reports")',
+                    dataType: 'json',
+                    data: { id: $("#ModuleId").val() },
+                    success: function(subModules) {
+                        $.each(subModules,
+                            function(i, subModules) {
+                                $("#SubModuleId").append('<option value="' +
+                                    subModules.value +
+                                    '">' +
+                                    subModules.text +
+                                    '</option>');
+
+                            });
+                    },
+                    error: function(ex) {
+                        alert('Failed to retrieve.' + ex);
+                    }
+                });
+                return false;
+            });
+        });
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('.custom-file-input').on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                if (fileName.length > 20) {
+                    fileName = fileName.substring(0, 20)+"...";
+                }
+                $(this).next('.custom-file-label').html(fileName);
+            }
+            );
+        });
+
+    </script>
+
+    <script>
+        var loadFile = function(event) {
+            var output = document.getElementById('output');
+            $( "#output" ).addClass( "report_image" );
+            output.src = URL.createObjectURL(event.target.files[0]);
+        };
+    </script>
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

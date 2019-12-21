@@ -1,0 +1,10 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+    Layout = "_Layout.Dialog";
+}
+<h1>@ViewData["Title"]</h1>
+
+<form asp-controller="Home" asp-action="Save" method="post">
+    <p>Use this page to detail your site's privacy policy.</p>
+    <input type="submit" value="save" />
+</form>

@@ -1,0 +1,54 @@
+﻿@using IdentityServer4.Extensions
+@{
+    string name = null;
+    if (!true.Equals(ViewData["signed-out"]))
+    {
+        name = Context.User?.GetDisplayName();
+    }
+}
+
+
+    @if (Model != null)
+    {
+
+        @foreach (var menu in Model)
+        {
+            <li class="nav-item dropdown">
+
+                <a class="p-2 nav-link text-white dropdown-toggle" href="#" id="dropdown01"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    @menu.Name
+                </a>
+
+
+                @if (menu.SubModules != null)
+                {
+                    <div class="dropdown-menu" aria-labelledby="dropdown01">
+                        @foreach (var subMenu in menu.SubModules)
+
+
+                        {
+                            <a class="dropdown-item text-white" onclick="loadSubMenu('@subMenu.Id')">@subMenu.Name</a>
+
+
+                        }
+                    </div>
+                }
+
+            </li>
+        }
+    }
+
+    @if (!string.IsNullOrWhiteSpace(name))
+    {
+        <li class="ml-2 mr-2 nav-item dropdown ml-auto">
+            <a class="nav-l text-white dropdown-toggle" href="#" id="dropdown01"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span> <img class="rounded-circle u-img-size" alt="@name" src="~/images/user.png" /></span>
+            </a>
+            <div class="dropdown-menu dropdown-m" aria-labelledby="dropdown01">
+                <a class="dropdown-item text-white" asp-action="Logout" asp-controller="Account">Logout</a>
+            </div>
+        </li>
+    }
+
