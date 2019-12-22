@@ -2,6 +2,17 @@
 
 
 /*DataTable And Table*/
+.dropdown-item {
+    color: #f8f9fa;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    color: #fff;
+    text-decoration: none;
+    background-color: #dadada;
+}
+
+
 th, td {
     white-space: nowrap;
 }
