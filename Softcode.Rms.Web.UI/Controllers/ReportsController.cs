@@ -27,7 +27,6 @@ namespace Softcode.Rms.Web.UI.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-        // GET: Reports
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Reports.Include(r => r.Module).Include(r => r.SubModule);

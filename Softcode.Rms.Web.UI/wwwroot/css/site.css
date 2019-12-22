@@ -1,17 +1,22 @@
 ﻿/*-----------------Custom CSS------------------*/
 
-
 /*DataTable And Table*/
+
 .dropdown-item {
     color: #f8f9fa;
 }
 
-.dropdown-item.active, .dropdown-item:active {
-    color: #fff;
-    text-decoration: none;
-    background-color: #dadada;
-}
+    /*.dropdown-item.active, .dropdown-item:active {
+        color: #fff !important;
+        text-decoration: none;
+        background: #278ac3 !important;
+    }*/
 
+    .dropdown-item:focus, .dropdown-item:hover {
+        color: #fff !important;
+        text-decoration: none;
+        background-color: #278ac3 !important;
+    }
 
 th, td {
     white-space: nowrap;
@@ -39,6 +44,7 @@ tr {
 }
 
 /*DataTable And Table*/
+
 
 
 
@@ -220,7 +226,12 @@ tr {
     }
 }
 
-a:hover {
+.inactiveLink {
+    pointer-events: none;
+    cursor: default;
+}
+
+a:hover, a:focus {
     text-decoration: none !important;
 }
 
@@ -271,6 +282,10 @@ a:hover {
     text-decoration: none !important;
     background: #278ac3;
 }*/
+
+.usr {
+    
+}
 
 .footer {
     line-height: 48px !important;

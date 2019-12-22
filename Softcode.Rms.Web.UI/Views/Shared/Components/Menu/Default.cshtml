@@ -47,6 +47,8 @@
                 <span> <img class="rounded-circle u-img-size" alt="@name" src="~/images/user.png" /></span>
             </a>
             <div class="dropdown-menu dropdown-m" aria-labelledby="dropdown01">
+               
+                @*<a class="inactiveLink dropdown-item text-white border usr">@(" "+@name)</a>*@
                 <a class="dropdown-item text-white" asp-action="Logout" asp-controller="Account">Logout</a>
             </div>
         </li>

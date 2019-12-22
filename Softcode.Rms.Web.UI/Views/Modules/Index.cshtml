@@ -8,7 +8,8 @@
 
 <h3 class="text-center">Modules</h3>
 
-<a class="button-blue float-right" data-toggle="tooltip" data-html="true" title="Add New" asp-action="Create"><i class="fas fa-plus-circle"></i></a>
+<a class="button-blue float-right" data-toggle="tooltip" data-html="true" 
+   title="Add New" asp-action="Create"><i class="fas fa-plus-circle"></i></a>
 
 <table class="display table table-striped table-bordered" id="table_module">
     <thead>
@@ -46,7 +47,7 @@
 @section scripts{
     <script src="~/js/jquery.dataTables.min.js"></script>
     <script src="~/js/dataTables.bootstrap4.min.js"></script>
-    <script src="~/js/typehead.js"></script>
+    <script src="~/js/typeHead.js"></script>
     <script>
         $(document).ready(function() {
                 var dataSrc = [];
@@ -55,18 +56,14 @@
                     'initComplete': function(){
                         var api = this.api();
 
-                        // Populate a dataset for autocomplete functionality
-                        // using data from first, second and third columns
                         api.cells('tr', [0]).every(function(){
-                            // Get cell data as plain text
+                     
                             var data = $('<div>').html(this.data()).text();
                             if(dataSrc.indexOf(data) === -1){ dataSrc.push(data); }
                         });
 
-                        // Sort dataset alphabetically
                         dataSrc.sort();
 
-                        // Initialize Typeahead plug-in
                         $('.dataTables_filter input[type="search"]', api.table().container())
                             .typeahead({
                                     source: dataSrc,
@@ -81,9 +78,5 @@
                             language: { "search": '', searchPlaceholder: '' }
                 });
             });
-
-
     </script>
-
-
 }
