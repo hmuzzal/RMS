@@ -1,20 +1,20 @@
-﻿using IdentityModel;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using IdentityModel;
 using IdentityServer4.Events;
 using IdentityServer4.Extensions;
 using IdentityServer4.Models;
+using IdentityServer4.Quickstart.UI;
 using IdentityServer4.Services;
 using IdentityServer4.Stores;
-using Softcode.Rms.Web.UI.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
+using Softcode.Rms.Web.UI.Models;
 
-namespace IdentityServer4.Quickstart.UI
+namespace Softcode.Rms.Web.UI.Quickstart.Account
 {
     [SecurityHeaders]
     [AllowAnonymous]
@@ -36,7 +36,7 @@ namespace IdentityServer4.Quickstart.UI
             IEventService events)
         {
             _userManager = userManager;
-            _signInManager = signInManager;
+            _signInManager = signInManager ?? throw new ArgumentNullException(nameof(signInManager));
             _interaction = interaction;
             _clientStore = clientStore;
             _schemeProvider = schemeProvider;
@@ -56,8 +56,6 @@ namespace IdentityServer4.Quickstart.UI
 
             return View(vm);
         }
-
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]

@@ -23,7 +23,7 @@
         <div class="row">
             @await Html.PartialAsync("_sidemenu")
 
-            <div class="col-sm-9 col-md-9 col-lg-10">
+            <div class="col-sm-9 col-md-9 col-lg-10 d-inline-block ml-auto mr-auto">
                 <div class="ms-view m-3" id="m-view">
                     @RenderBody()
                 </div>
@@ -48,10 +48,10 @@
         }
         function loadReport(imageUrl) {
             $(".ms-view").addClass("text-center");
-            $("#m-view").html($("<img>").attr("src", imageUrl));
+            $("#m-view").html($("<img class=" + "mi-view>").attr("src", imageUrl));
         }
     </script>
 
-    @RenderSection("Scripts", required: false)
+@RenderSection("Scripts", required: false)
 </body>
 </html>

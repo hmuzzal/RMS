@@ -1,8 +1,25 @@
-﻿<ul class="nav">
-    @foreach (var report in Model)
-    {
-    <li class="side-li border-bottom mt-1 mb-1">
-        <a class="text-white pl-3" onclick="loadReport('@report.ImageUrl')">@report.Title</a>
-    </li>
-    }
-</ul>
+﻿@*<ul class="nav">
+        @foreach (var report in Model)
+        {
+            <li class="side-li border-bottom mt-1 mb-1  pl-3 pr-1" onclick="loadReport('@report.ImageUrl')">
+                <a class="text-white">@report.Title</a>
+            </li>
+        }
+    </ul>*@
+
+@foreach (var report in Model)
+{
+    <li onclick="loadReport('@report.ImageUrl')"><a class="border-light" href="#"><span><i class="fas fa-chart-bar"></i></span><span>@report.Title</span></a></li>
+}
+
+
+
+
+@*<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sidebar-btn').click(function () {
+            $('#sidebar-wrapper').toggleClass('visible');
+            $('#wrapper').toggleClass('visible');
+        });
+    });
+</script>*@

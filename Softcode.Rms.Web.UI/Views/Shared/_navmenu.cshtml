@@ -1,16 +1,15 @@
-﻿<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light navcolor border-bottom box-shadow">
+﻿<nav class="navbar navbar-expand-xl navbar-toggleable-sm navbar-light navcolor border-bottom box-shadow">
     <div class="container nav-height">
-        <a class="navbar-brand brand-a" asp-area="" asp-controller="Home" asp-action="Index"><span><img class="logo-size" src="~/GTex-logo.png" /></span></a>
+        <a class="navbar-brand brand-a" asp-area="" asp-controller="Home" asp-action="Index"><span><img class="logo-size" src="@ViewBag.LogoUrl"/></span></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-    
 
-        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+
+        <div class="navbar-collapse collapse d-xl-inline-flex flex-xl-row-reverse">
             <ul class="navbar-nav flex-grow-1 clr-collapse">
                 <li class="nav-item dropdown">
-
                     <a class="p-2 nav-link text-white dropdown-toggle" href="#" id="dropdown01"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Setup

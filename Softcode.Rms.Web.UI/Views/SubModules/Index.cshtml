@@ -8,8 +8,6 @@
 
 <h3 class="text-center">Sub-Modules</h3>
 
-<a class="button-blue float-right" asp-action="Create"><i class="fas fa-plus-circle"></i></a>
-
 <table class="display table table-striped table-bordered" id="table_subModule">
     <thead>
         <tr>
@@ -70,6 +68,7 @@
                 responsive: true,
                 language: { "search": '', searchPlaceholder: '' }
             });
+            $("#table_subModule_filter").append('<a class="button-blue float-right ml-3" href="SubModules/Create"Create""><i class="fas fa-plus-circle"></i></a> ');
         });
     </script>
 }

@@ -107,25 +107,27 @@ namespace Softcode.Rms.Web.UI.Controllers
 
             if (ModelState.IsValid)
             {
-                //if (ModuleNameExistsExceptCurrent(@module))
-                //{
-                //    ModelState.AddModelError(string.Empty, "Module already exists.");
-                //    return View(@module);
+                if (ModuleNameExistsExceptCurrent(@module))
+                {
+                    ModelState.AddModelError(string.Empty, "Module already exists.");
+                    return View(@module);
 
 
-                //}
+                }
 
-                //if (ModuleSerialExistsExceptCurrent(@module))
-                //{
-                //    ModelState.AddModelError(string.Empty, "Serial No. is already given to a module.");
-                //    return View(@module);
+                if (ModuleSerialExistsExceptCurrent(@module))
+                {
+                    ModelState.AddModelError(string.Empty, "Serial No. is already given to a module.");
+                    return View(@module);
 
-                //}
+                }
 
                 try
                 {
-                    _context.Update(@module);
-                    await _context.SaveChangesAsync();
+                    
+                        _context.Update(@module);
+
+                        await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -152,26 +154,7 @@ namespace Softcode.Rms.Web.UI.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //public ActionResult GetMenuList()
-        //{
-        //    var menus = _context.Modules.Include(m => m.SubModules)
-        //        .Include(m => m.Reports).ToList();
-        //    List<Module> menuTree = GetMenuTree(menus, 1);
-        //    return View("_menuFromDb", menuTree);
-        //}
-        //public JsonResult MenuList()
-        //{
-        //    var menus = _context.Modules.Include(m => m.SubModules)
-        //        .Include(m => m.Reports).ToList();
-        //    List<Module> menuTree = GetMenuTree(menus, 1);
-        //    return Json(menuTree);
-        //}
-
-        //private List<Module> GetMenuTree(List<Module> moduleList, int? moduleId)
-        //{
-        //    return moduleList.Where(x => x.Id == moduleId).ToList();
-        //}
-
+        
         private bool ModuleExists(int id)
         {
             return _context.Modules.Any(e => e.Id == id);
@@ -184,7 +167,7 @@ namespace Softcode.Rms.Web.UI.Controllers
         private bool ModuleNameExistsExceptCurrent(Module module)
         {
             var currentModule = _context.Modules.Where(m => m.Id == module.Id);
-            return _context.Modules.ToList().Except(currentModule).Any(e => e.Name == module.Name);
+            return _context.Modules.AsNoTracking().Except(currentModule).Any(e => e.Name == module.Name);
         }
         private bool ModuleSerialExists(int serial)
         {
@@ -194,7 +177,7 @@ namespace Softcode.Rms.Web.UI.Controllers
         private bool ModuleSerialExistsExceptCurrent(Module module)
         {
             var currentModule = _context.Modules.Where(m => m.Id == module.Id);
-            return _context.Modules.ToList().Except(currentModule).Any(e => e.SerialNo == module.SerialNo);
+            return _context.Modules.AsNoTracking().Except(currentModule).ToList().Any(e => e.SerialNo == module.SerialNo);
         }
 
         public PartialViewResult SideNavBer(int id)

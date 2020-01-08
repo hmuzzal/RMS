@@ -9,7 +9,7 @@
 
 <h3 class="text-center">Reports</h3>
 
-<a class="button-blue float-right" asp-action="Create"><i class="fas fa-plus-circle"></i></a>
+
 
 <table class="display table table-striped table-bordered" id="report">
     <thead>
@@ -26,9 +26,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.IsoNo)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Module)
             </th>
@@ -57,9 +57,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.IsoNo)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.Module.Name)
                 </td>
@@ -84,31 +84,35 @@
     <script src="~/js/dataTables.bootstrap4.min.js"></script>
     <script src="~/js/typeHead.js"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             var dataSrc = [];
 
             $('#report').DataTable({
-                'initComplete': function(){
+                'initComplete': function () {
                     var api = this.api();
-                    api.cells('tr', [4,5]).every(function(){
+                    api.cells('tr', [3, 4]).every(function () {
                         var data = $('<div>').html(this.data()).text();
-                        if(dataSrc.indexOf(data) === -1){ dataSrc.push(data); }
+                        if (dataSrc.indexOf(data) === -1) {
+                            dataSrc.push(data);
+                        }
                     });
 
                     dataSrc.sort();
 
                     $('.dataTables_filter input[type="search"]', api.table().container())
                         .typeahead({
-                                source: dataSrc,
-                                afterSelect: function(value){
-                                    api.search(value).draw();
-                                }
+                            source: dataSrc,
+                            afterSelect: function (value) {
+                                api.search(value).draw();
                             }
+                        }
                         );
                 },
                 responsive: true,
                 language: { "search": '', searchPlaceholder: '' }
+
             });
-        });
+            $("#report_filter").append('<a class="button-blue float-right ml-3" href="Reports/Create"Create""><i class="fas fa-plus-circle"></i></a> ');
+            });
     </script>
 }
